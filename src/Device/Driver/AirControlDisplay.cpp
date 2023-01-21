@@ -35,7 +35,7 @@ Copyright_License {
 static bool
 ParsePAAVS(NMEAInputLine &line, NMEAInfo &info)
 {
-  double value;
+  double XXvalue;
 
   char type[16];
   line.Read(type, 16);
