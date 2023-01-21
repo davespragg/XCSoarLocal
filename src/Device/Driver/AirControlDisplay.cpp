@@ -106,6 +106,9 @@ public:
   bool PutQNH(const AtmosphericPressure &pres,
               OperationEnvironment &env) override;
   bool PutVolume(unsigned volume, OperationEnvironment &env) override;
+  bool PutActiveFrequency(RadioFrequency frequency,
+                           const TCHAR *name,
+                           OperationEnvironment &env) override;
   bool PutStandbyFrequency(RadioFrequency frequency,
                            const TCHAR *name,
                            OperationEnvironment &env) override;
@@ -126,6 +129,23 @@ ACDDevice::PutVolume(unsigned volume, OperationEnvironment &env)
 {
   char buffer[100];
   sprintf(buffer, "PAAVC,S,COM,RXVOL1,%u", volume);
+  PortWriteNMEA(port, buffer, env);
+  return true;
+}
+
+bool
+ACDDevice::PutActiveFrequency(RadioFrequency frequency,
+                                   [[maybe_unused]] const TCHAR *name,
+                                   OperationEnvironment &env)
+{
+  //Bit of a hack until they implement this properly in the device
+  char buffer[100];
+  unsigned freq = frequency.GetKiloHertz();
+  sprintf(buffer, "PAAVX,COM,XCHN");
+  PortWriteNMEA(port, buffer, env);
+  sprintf(buffer, "PAAVC,S,COM,CHN2,%u", freq);
+  PortWriteNMEA(port, buffer, env);
+  sprintf(buffer, "PAAVX,COM,XCHN");
   PortWriteNMEA(port, buffer, env);
   return true;
 }
