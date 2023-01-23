@@ -144,10 +144,12 @@ ACDDevice::PutActiveFrequency(RadioFrequency frequency,
   unsigned freq = frequency.GetKiloHertz();
   sprintf(buffer, "PAAVX,COM,XCHN");
   PortWriteNMEA(port, buffer, env);
-  port.WaitConnected(env);
+  int i=0;
+  while (!port.WaitConnected(env) && (i<40)) {i++;};
   sprintf(buffer, "PAAVC,S,COM,CHN2,%u", freq);
   PortWriteNMEA(port, buffer, env);
-  port.WaitConnected(env);
+  int i=0;
+  while (!port.WaitConnected(env) && (i<40)) {i++;};
   sprintf(buffer, "PAAVX,COM,XCHN");
   PortWriteNMEA(port, buffer, env);
   return true;
