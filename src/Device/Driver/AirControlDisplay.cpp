@@ -24,6 +24,7 @@ Copyright_License {
 #include "Device/Driver/AirControlDisplay.hpp"
 #include "Device/Driver.hpp"
 #include "Device/Util/NMEAWriter.hpp"
+#include "Device/Port/Port.hpp"
 #include "NMEA/Info.hpp"
 #include "NMEA/InputLine.hpp"
 #include "NMEA/Checksum.hpp"
