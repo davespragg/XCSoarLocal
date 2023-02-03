@@ -830,11 +830,12 @@ DeviceDescriptor::ForwardLine(const char *line)
 	    p->Write("\r\n");
 	  }
 
-	  if (NeedsGPS() && port != nullptr) {
+/*	  if (NeedsGPS() && port != nullptr) {
 	    Port *p = port.get();
 	    p->Write(line);
 	    p->Write("\r\n");
 	  }
+	  */
 }
 
 bool
