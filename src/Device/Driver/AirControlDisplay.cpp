@@ -190,6 +190,6 @@ AirControlDisplayCreateOnPort([[maybe_unused]] const DeviceConfig &config, Port 
 const struct DeviceRegister acd_driver = {
   _T("ACD"),
   _T("Air Control Display"),
-  DeviceRegister::RECEIVE_SETTINGS | DeviceRegister::SEND_SETTINGS | DeviceRegister::NMEA_OUT,
+  DeviceRegister::RECEIVE_SETTINGS | DeviceRegister::SEND_SETTINGS | DeviceRegister::NEEDS_GPS,
   AirControlDisplayCreateOnPort,
 };

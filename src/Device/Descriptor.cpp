@@ -696,6 +696,12 @@ DeviceDescriptor::IsNMEAOut() const noexcept
 }
 
 bool
+DeviceDescriptor::NeedsGPS() const noexcept
+{
+  return driver != nullptr && driver->NeedsGPS();
+}
+
+bool
 DeviceDescriptor::IsManageable() const noexcept
 {
   if (driver != nullptr) {
@@ -818,11 +824,17 @@ DeviceDescriptor::ForwardLine(const char *line)
   /* XXX make this method thread-safe; this method can be called from
      any thread, and if the Port gets closed, bad things happen */
 
-  if (IsNMEAOut() && port != nullptr) {
-    Port *p = port.get();
-    p->Write(line);
-    p->Write("\r\n");
-  }
+	  if (IsNMEAOut() && port != nullptr) {
+	    Port *p = port.get();
+	    p->Write(line);
+	    p->Write("\r\n");
+	  }
+
+	  if (NeedsGPS() && port != nullptr) {
+	    Port *p = port.get();
+	    p->Write(line);
+	    p->Write("\r\n");
+	  }
 }
 
 bool
