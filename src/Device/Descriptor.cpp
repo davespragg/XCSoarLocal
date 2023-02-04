@@ -38,6 +38,7 @@ Copyright_License {
 #include "util/StringAPI.hxx"
 #include "util/ConvertString.hpp"
 #include "util/Exception.hxx"
+#include "util/CharUtil.hxx"
 #include "Logger/NMEALogger.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Operation.hpp"
