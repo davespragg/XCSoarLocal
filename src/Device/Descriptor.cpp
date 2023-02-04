@@ -831,9 +831,20 @@ DeviceDescriptor::ForwardLine(const char *line)
 	  }
 
 	  if (NeedsGPS() && port != nullptr) {
-	    Port *p = port.get();
-	    p->Write(line);
-	    p->Write("\r\n");
+		  if (string[0] == '$')) {
+			  NMEAInputLine line(string);
+
+			  char type[16];
+			  line.Read(type, 16);
+
+			  if (IsAlphaASCII(type[1]) && IsAlphaASCII(type[2])) {
+				    if (StringIsEqual(type + 3, "GGA") || StringIsEqual(type + 3, "RMC")) {
+						Port *p = port.get();
+						p->Write(line);
+						p->Write("\r\n");
+				    }
+			  }
+		  }
 	  }
 
 }
