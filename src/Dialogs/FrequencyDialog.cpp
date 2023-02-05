@@ -174,6 +174,9 @@ FrequencyListWidget::UpdateList() noexcept
 	  if (frequency != nullptr) {
 		  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 		  channel->radio_frequency = radio_frequency;
+	  } else {
+		  RadioFrequency radio_frequency = RadioFrequency::Parse(_T("0"));
+		  channel->radio_frequency = radio_frequency;
 	  }
 
 	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
