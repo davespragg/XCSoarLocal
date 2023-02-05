@@ -111,8 +111,7 @@ FrequencyListWidget::CreateButtons(WidgetDialog &dialog)
     const RadioChannel *channel = &(*channels)[index];
     if (channel->radio_frequency.IsDefined()) {
     	ActionInterface::SetStandbyFrequency(channel->radio_frequency,
-            channel->name.c_str());
-    }
+            channel->name.c_str());}
     cancel_button->Click();
 });
 
