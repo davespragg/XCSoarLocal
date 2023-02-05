@@ -179,19 +179,24 @@ FrequencyListWidget::UpdateList() noexcept
 void
 FrequencyDialogShowModal() noexcept
 {
-  static std::vector<FrequencyListWidget::RadioChannel> channels;
+//  static std::vector<FrequencyListWidget::RadioChannel> channels;
+  std::vector<FrequencyListWidget::RadioChannel> channels;
 
   const DialogLook &look = UIGlobals::GetDialogLook();
 
   auto widget = std::make_unique<FrequencyListWidget>(look,&channels);
+  if (widget->UpdateList() == false) {
+	// no channels: don't show the dialog
+	return;
+  }
 
-  if (channels.size() == 0 || FrequenciesFileChanged == true) {
+/*  if (channels.size() == 0 || FrequenciesFileChanged == true) {
     FrequenciesFileChanged = false;
 	if (widget->UpdateList() == false) {
 	  // no channels: don't show the dialog
 	  return;
 	}
-  }
+  }*/
 
   TWidgetDialog<FrequencyListWidget>
     dialog(WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
