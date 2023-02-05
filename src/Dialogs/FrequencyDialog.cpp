@@ -35,6 +35,9 @@ Copyright_License {
 #include "util/ExtractParameters.hpp"
 #include "util/StringCompare.hxx"
 #include "util/Macros.hpp"
+#include "XML/Node.hpp"
+#include "XML/DataNodeXML.hpp"
+#include "XML/Parser.hpp"
 
 class FrequencyListWidget final
   : public ListWidget {
@@ -145,8 +148,35 @@ FrequencyListWidget::UpdateList() noexcept
   if (path == nullptr) {
     return false;
   }
+//////////////
 
-  FileLineReader reader(path, Charset::AUTO);
+  // Load root node
+  const auto xml_root = XML::ParseFile(path);
+  const ConstDataNodeXML root(xml_root);
+
+  // Check if root node is a <FrequencyList> node
+  if (!StringIsEqual(root.GetName(), _T("FrequencyList")))
+    return false;
+
+  const auto children = node.ListChildrenNamed(_T("Station"));
+  for (const auto &i : children) {
+	  const TCHAR *name = node.GetAttribute(_T("name"));
+	  if (name == nullptr)
+	    return;
+	  const TCHAR *frequency = node.GetAttribute(_T("frequency"));
+	  if (frequency == nullptr)
+	    return;
+
+	  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
+	  if (radio_frequency.IsDefined()) {
+	    RadioChannel *channel = new RadioChannel();
+	    channel->name = name;
+	    channel->radio_frequency = radio_frequency;
+	    channels->push_back(*channel);
+	  }
+  }
+  return !channels->empty();
+/*  FileLineReader reader(path, Charset::AUTO);
 
   TCHAR *line;
   while ((line = reader.ReadLine()) != NULL) {
@@ -156,7 +186,7 @@ FrequencyListWidget::UpdateList() noexcept
 
 	TCHAR ctemp[4096];
 	if (_tcslen(line) >= ARRAY_SIZE(ctemp))
-	  /* line too long for buffer */
+	  // line too long for buffer
 	  continue;
 
 	const TCHAR *params[2];
@@ -174,12 +204,12 @@ FrequencyListWidget::UpdateList() noexcept
     }
   }
   return !channels->empty();
+  */
 }
 
 void
 FrequencyDialogShowModal() noexcept
 {
-//  static std::vector<FrequencyListWidget::RadioChannel> channels;
   std::vector<FrequencyListWidget::RadioChannel> channels;
 
   const DialogLook &look = UIGlobals::GetDialogLook();
@@ -189,14 +219,6 @@ FrequencyDialogShowModal() noexcept
 	// no channels: don't show the dialog
 	return;
   }
-
-/*  if (channels.size() == 0 || FrequenciesFileChanged == true) {
-    FrequenciesFileChanged = false;
-	if (widget->UpdateList() == false) {
-	  // no channels: don't show the dialog
-	  return;
-	}
-  }*/
 
   TWidgetDialog<FrequencyListWidget>
     dialog(WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
