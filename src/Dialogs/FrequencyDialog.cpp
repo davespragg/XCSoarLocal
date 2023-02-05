@@ -83,7 +83,7 @@ public:
     // Draw name and frequency
     row_renderer.DrawTextRow(canvas, rc, channel.name.c_str());
 
-    if (channel.radio_frequency != null && channel.radio_frequency.IsDefined()) {
+    if (channel.radio_frequency.IsDefined()) {
     	StaticString<30> buffer;
     	TCHAR radio[20];
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
@@ -173,15 +173,11 @@ FrequencyListWidget::UpdateList() noexcept
 	  if (frequency != nullptr) {
 		  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 		  channel->radio_frequency = radio_frequency;
-	  } else {
-		  channel->radio_frequency = null;
 	  }
 
 	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
 	  if (squawk != nullptr) {
 		  channel->squawk = ParseUnsigned(squawk);
-	  } else {
-		  channel->squawk = null;
 	  }
 
 	  channels->push_back(*channel);
