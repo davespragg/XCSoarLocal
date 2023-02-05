@@ -83,7 +83,7 @@ public:
     // Draw name and frequency
     row_renderer.DrawTextRow(canvas, rc, channel.name.c_str());
 
-    if (channel.radio_frequency.IsDefined()) {
+    if (channel.radio_frequency != null && channel.radio_frequency.IsDefined()) {
     	StaticString<30> buffer;
     	TCHAR radio[20];
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
@@ -166,21 +166,26 @@ FrequencyListWidget::UpdateList() noexcept
 	  const TCHAR *name = i->GetAttribute(_T("name"));
 	  if (name == nullptr)
 	    continue;
-	  const TCHAR *frequency = i->GetAttribute(_T("frequency"));
-//	  if (frequency == nullptr)
-//	    continue;
-	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
+	  RadioChannel *channel = new RadioChannel();
+	  channel->name = name;
 
-	  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
-//	  if (radio_frequency.IsDefined()) {
-	    RadioChannel *channel = new RadioChannel();
-	    channel->name = name;
-	    channel->radio_frequency = radio_frequency;
-	    if (squawk != nullptr) {
-//	    	channel->squawk = ParseUnsigned(squawk);
-	    }
-	    channels->push_back(*channel);
-//	  }
+	  const TCHAR *frequency = i->GetAttribute(_T("frequency"));
+	  if (frequency != nullptr) {
+		  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
+		  channel->radio_frequency = radio_frequency;
+	  } else {
+		  channel->radio_frequency = null;
+	  }
+
+	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
+	  if (squawk != nullptr) {
+		  channel->squawk = ParseUnsigned(squawk);
+	  } else {
+		  channel->squawk = null;
+	  }
+
+	  channels->push_back(*channel);
+
   }
   return !channels->empty();
 }
