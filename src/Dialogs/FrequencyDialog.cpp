@@ -26,7 +26,8 @@ Copyright_License {
 #include "Widget/ListWidget.hpp"
 #include "Look/DialogLook.hpp"
 #include "UIGlobals.hpp"
-#include "Renderer/TextRowRenderer.hpp"
+//#include "Renderer/TextRowRenderer.hpp"
+#include "Renderer/TwoTextRowsRenderer.hpp"
 #include "Language/Language.hpp"
 #include "ActionInterface.hpp"
 #include "Profile/Profile.hpp"
@@ -44,7 +45,8 @@ class FrequencyListWidget final
   : public ListWidget {
 
   const DialogLook &dialog_look;
-  TextRowRenderer row_renderer;
+//  TextRowRenderer row_renderer;
+  TwoTextRowsRenderer row_renderer;
   Button *active_button, *standby_button, *cancel_button;
 
 public:
@@ -80,6 +82,22 @@ public:
 
     const RadioChannel& channel = (*channels)[index];
 
+    row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
+//    row_renderer.DrawSecondRow(canvas, rc, buffer);
+    if (channel.radio_frequency.IsDefined()) {
+    	StaticString<30> buffer;
+    	TCHAR radio[20];
+      channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
+      buffer.Format(_T("%s MHz"), radio);
+      row_renderer.DrawRightFirstRow(canvas, rc, buffer);
+    }
+
+    if (channel.squawk > 0) {
+    	buffer.Format(_T("%d"), squawk);
+    	row_renderer.DrawRightSecondRow(canvas, rc, buffer);
+    }
+
+    /*
     // Draw name and frequency
     row_renderer.DrawTextRow(canvas, rc, channel.name.c_str());
 
@@ -89,10 +107,9 @@ public:
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
       buffer.Format(_T("%s MHz"), radio);
       row_renderer.DrawRightColumn(canvas, rc, buffer);
-//      row_renderer.NextColumn(canvas, rc, buffer);
-//      row_renderer.DrawRightColumn(canvas, rc, _("1234"));
-      }
 
+      }
+*/
   }
 
   bool CanActivateItem([[maybe_unused]] unsigned index) const noexcept override {
