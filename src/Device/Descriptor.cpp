@@ -38,6 +38,7 @@ Copyright_License {
 #include "util/StringAPI.hxx"
 #include "util/ConvertString.hpp"
 #include "util/Exception.hxx"
+#include "util/CharUtil.hxx"
 #include "Logger/NMEALogger.hpp"
 #include "Language/Language.hpp"
 #include "Operation/Operation.hpp"
@@ -696,6 +697,12 @@ DeviceDescriptor::IsNMEAOut() const noexcept
 }
 
 bool
+DeviceDescriptor::NeedsGPS() const noexcept
+{
+  return driver != nullptr && driver->NeedsGPS();
+}
+
+bool
 DeviceDescriptor::IsManageable() const noexcept
 {
   if (driver != nullptr) {
@@ -823,6 +830,19 @@ DeviceDescriptor::ForwardLine(const char *line)
     p->Write(line);
     p->Write("\r\n");
   }
+
+  if (NeedsGPS() && port != nullptr) {
+	  if (line[0] == '$') {
+		  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
+			    if (StringIsEqual(line + 3, "RMC", 3) || StringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
+					Port *p = port.get();
+					p->Write(line);
+					p->Write("\r\n");
+			    }
+		  }
+	  }
+  }
+
 }
 
 bool

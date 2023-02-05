@@ -462,6 +462,7 @@ public:
   }
 
   bool IsNMEAOut() const noexcept;
+  bool NeedsGPS() const noexcept;
   bool IsManageable() const noexcept;
 
   bool IsBorrowed() const noexcept {

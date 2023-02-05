@@ -353,6 +353,11 @@ struct DeviceRegister {
      * EnablePassThrough() is implemented.
      */
     PASS_THROUGH = 0x200,
+
+    /**
+     * Does the device need a GPS position feed?
+     */
+    NEEDS_GPS = 0x400,
   };
 
   /**
@@ -449,5 +454,12 @@ struct DeviceRegister {
    */
   bool HasPassThrough() const {
     return (flags & PASS_THROUGH) != 0;
+  }
+
+  /**
+   * Does this driver need a GPS Feed?
+   */
+  bool NeedsGPS() const {
+    return (flags & NEEDS_GPS) != 0;
   }
 };
