@@ -86,9 +86,9 @@ public:
     	TCHAR radio[20];
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
       buffer.Format(_T("%s MHz"), radio);
-//      row_renderer.DrawRightColumn(canvas, rc, buffer);
-      row_renderer.NextColumn(canvas, rc, buffer);
-      row_renderer.DrawRightColumn(canvas, rc, _("1234"));
+      row_renderer.DrawRightColumn(canvas, rc, buffer);
+//      row_renderer.NextColumn(canvas, rc, buffer);
+//      row_renderer.DrawRightColumn(canvas, rc, _("1234"));
       }
 
   }
