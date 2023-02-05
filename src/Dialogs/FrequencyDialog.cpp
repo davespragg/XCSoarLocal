@@ -162,10 +162,10 @@ FrequencyListWidget::UpdateList() noexcept
   for (const auto &i : children) {
 	  const TCHAR *name = i->GetAttribute(_T("name"));
 	  if (name == nullptr)
-	    return;
+	    continue;
 	  const TCHAR *frequency = i->GetAttribute(_T("frequency"));
 	  if (frequency == nullptr)
-	    return;
+	    continue;
 
 	  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 	  if (radio_frequency.IsDefined()) {
