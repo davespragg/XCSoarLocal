@@ -93,7 +93,8 @@ public:
     }
 
     if (channel.squawk > 0) {
-    	buffer.Format(_T("%d"), squawk);
+    	StaticString<30> buffer;
+    	buffer.Format(_T("%d"), channel.squawk);
     	row_renderer.DrawRightSecondRow(canvas, rc, buffer);
     }
 
