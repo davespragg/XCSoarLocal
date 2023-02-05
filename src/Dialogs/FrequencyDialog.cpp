@@ -87,7 +87,7 @@ public:
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
       buffer.Format(_T("%s MHz"), radio);
       row_renderer.DrawRightColumn(canvas, rc, buffer);
-      row_renderer.DrawRightColumn(canvas, rc, "1234");
+      row_renderer.DrawRightColumn(canvas, rc, _("1234"));
       }
 
   }
