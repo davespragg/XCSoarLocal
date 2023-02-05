@@ -130,7 +130,7 @@ FrequencyListWidget::Prepare(ContainerWindow &parent,
 }
 
 void
-FrequencyListWidget::OnActivateItem(unsigned index) noexcept
+FrequencyListWidget::OnActivateItem([[maybe_unused]] unsigned index) noexcept
 {
   // May still be talking on active frequency
   standby_button->Click();
