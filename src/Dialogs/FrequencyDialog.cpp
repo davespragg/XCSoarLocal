@@ -176,7 +176,7 @@ FrequencyListWidget::UpdateList() noexcept
 	    RadioChannel *channel = new RadioChannel();
 	    channel->name = name;
 	    channel->radio_frequency = radio_frequency;
-	    if (frequency != nullptr) {
+	    if (squawk != nullptr) {
 	    	channel->squawk = ParseUnsigned(squawk);
 	    }
 	    channels->push_back(*channel);
