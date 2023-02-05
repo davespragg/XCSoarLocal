@@ -119,8 +119,10 @@ FrequencyListWidget::CreateButtons(WidgetDialog &dialog)
     unsigned index = GetCursorIndex();
     assert(index < channels->size());
     const RadioChannel *channel = &(*channels)[index];
-    ActionInterface::SetActiveFrequency(channel->radio_frequency,
+    if (channel->radio_frequency.IsDefined()) {
+    	ActionInterface::SetActiveFrequency(channel->radio_frequency,
             channel->name.c_str());
+    }
     cancel_button->Click();
   });
 
@@ -175,7 +177,7 @@ FrequencyListWidget::UpdateList() noexcept
 		  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 		  channel->radio_frequency = radio_frequency;
 	  } else {
-		  RadioFrequency radio_frequency = RadioFrequency::Parse(_T("0"));
+		  RadioFrequency radio_frequency = RadioFrequency::Null());
 		  channel->radio_frequency = radio_frequency;
 	  }
 
