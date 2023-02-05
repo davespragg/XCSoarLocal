@@ -152,7 +152,7 @@ FrequencyListWidget::Prepare(ContainerWindow &parent,
                               const PixelRect &rc) noexcept
 {
   CreateList(parent, dialog_look, rc,
-             row_renderer.CalculateLayout(*dialog_look.list.font_bold), *dialog_look.list.font_bold));
+             row_renderer.CalculateLayout(*dialog_look.list.font_bold, *dialog_look.list.font_bold));
 
   GetList().SetLength(channels->size());
 }
