@@ -87,6 +87,7 @@ public:
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
       buffer.Format(_T("%s MHz"), radio);
       row_renderer.DrawRightColumn(canvas, rc, buffer);
+      row_renderer.DrawRightColumn(canvas, rc, "1234");
       }
 
   }
@@ -148,7 +149,6 @@ FrequencyListWidget::UpdateList() noexcept
   if (path == nullptr) {
     return false;
   }
-//////////////
 
   // Load root node
   const auto xml_root = XML::ParseFile(path);
@@ -176,35 +176,6 @@ FrequencyListWidget::UpdateList() noexcept
 	  }
   }
   return !channels->empty();
-/*  FileLineReader reader(path, Charset::AUTO);
-
-  TCHAR *line;
-  while ((line = reader.ReadLine()) != NULL) {
-
-	if (StringIsEmpty(line))
-	  continue;
-
-	TCHAR ctemp[4096];
-	if (_tcslen(line) >= ARRAY_SIZE(ctemp))
-	  // line too long for buffer
-	  continue;
-
-	const TCHAR *params[2];
-    size_t n_params = ExtractParameters(line, ctemp, params,
-                                      ARRAY_SIZE(params), true, _T('"'));
-    if (n_params != 2)
-      continue;
-
-    RadioFrequency radio_frequency = RadioFrequency::Parse(params[1]);
-    if (radio_frequency.IsDefined()) {
-      RadioChannel *channel = new RadioChannel();
-      channel->name = params[0];
-      channel->radio_frequency = radio_frequency;
-      channels->push_back(*channel);
-    }
-  }
-  return !channels->empty();
-  */
 }
 
 void
