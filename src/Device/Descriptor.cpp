@@ -834,7 +834,7 @@ DeviceDescriptor::ForwardLine(const char *line)
 	  if (NeedsGPS() && port != nullptr) {
 		  if (line[0] == '$') {
 			  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
-				    if (StringIsEqual(line + 3, "RMC", 3) || StringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
+				    if (StringIsEqual(line + 3, "RMC", 3) || xStringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
 						Port *p = port.get();
 						p->Write(line);
 						p->Write("\r\n");
