@@ -88,11 +88,11 @@ public:
 
   }
 
-  bool CanActivateItem(unsigned index) const noexcept override {
+  bool CanActivateItem([[maybe_unused]] unsigned index) const noexcept override {
     return true;
   }
 
-  void OnActivateItem(unsigned index) noexcept override;
+  void OnActivateItem([[maybe_unused]] unsigned index) noexcept override;
 };
 
 void
