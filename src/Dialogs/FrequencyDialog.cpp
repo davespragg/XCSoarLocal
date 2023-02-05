@@ -172,7 +172,7 @@ FrequencyListWidget::UpdateList() noexcept
 	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
 
 	  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
-	  if (radio_frequency.IsDefined()) {
+//	  if (radio_frequency.IsDefined()) {
 	    RadioChannel *channel = new RadioChannel();
 	    channel->name = name;
 	    channel->radio_frequency = radio_frequency;
@@ -180,7 +180,7 @@ FrequencyListWidget::UpdateList() noexcept
 	    	channel->squawk = ParseUnsigned(squawk);
 	    }
 	    channels->push_back(*channel);
-	  }
+//	  }
   }
   return !channels->empty();
 }
