@@ -160,10 +160,10 @@ FrequencyListWidget::UpdateList() noexcept
 
   const auto children = root.ListChildrenNamed(_T("Station"));
   for (const auto &i : children) {
-	  const TCHAR *name = i.GetAttribute(_T("name"));
+	  const TCHAR *name = i->GetAttribute(_T("name"));
 	  if (name == nullptr)
 	    return;
-	  const TCHAR *frequency = i.GetAttribute(_T("frequency"));
+	  const TCHAR *frequency = i->GetAttribute(_T("frequency"));
 	  if (frequency == nullptr)
 	    return;
 
