@@ -35,6 +35,7 @@ Copyright_License {
 #include "util/ExtractParameters.hpp"
 #include "util/StringCompare.hxx"
 #include "util/Macros.hpp"
+#include "util/NumberParser.hpp"
 #include "XML/Node.hpp"
 #include "XML/DataNodeXML.hpp"
 #include "XML/Parser.hpp"
@@ -50,6 +51,7 @@ public:
   struct RadioChannel {
 	  tstring name;
 	  RadioFrequency radio_frequency;
+	  unsigned squawk;
   };
   std::vector<RadioChannel> *channels;
 
@@ -167,12 +169,16 @@ FrequencyListWidget::UpdateList() noexcept
 	  const TCHAR *frequency = i->GetAttribute(_T("frequency"));
 	  if (frequency == nullptr)
 	    continue;
+	  const TCHAR *squawk = i->GetAttribute(_T("squawk"));
 
 	  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 	  if (radio_frequency.IsDefined()) {
 	    RadioChannel *channel = new RadioChannel();
 	    channel->name = name;
 	    channel->radio_frequency = radio_frequency;
+	    if (frequency != nullptr) {
+	    	channel->squawk = ParseUnsigned(squawk);
+	    }
 	    channels->push_back(*channel);
 	  }
   }
