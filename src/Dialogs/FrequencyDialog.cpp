@@ -158,7 +158,7 @@ FrequencyListWidget::UpdateList() noexcept
   if (!StringIsEqual(root.GetName(), _T("FrequencyList")))
     return false;
 
-  const auto children = xml_root.ListChildrenNamed(_T("Station"));
+  const auto children = root.ListChildrenNamed(_T("Station"));
   for (const auto &i : children) {
 	  const TCHAR *name = i.GetAttribute(_T("name"));
 	  if (name == nullptr)
