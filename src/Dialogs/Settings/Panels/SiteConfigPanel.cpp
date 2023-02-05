@@ -41,7 +41,8 @@ enum ControlIndex {
   AirspaceFile,
   AdditionalAirspaceFile,
   AirfieldFile,
-  FlarmFile
+  FlarmFile,
+  FrequenciesFile
 };
 
 class SiteConfigPanel final : public RowFormWidget {
@@ -110,6 +111,12 @@ SiteConfigPanel::Prepare([[maybe_unused]] ContainerWindow &parent, [[maybe_unuse
           _("The name of the file containing information about registered FLARM devices."),
           ProfileKeys::FlarmFile, _T("*.fln\0"),
           FileType::FLARMNET);
+
+  AddFile(_("Radio Frequency Database"),
+          _("Radio frequencies file."),
+          ProfileKeys::FrequenciesFile, _T("*.frq\0"),
+          FileType::FREQUENCIES);
+
 }
 
 bool
@@ -128,11 +135,12 @@ SiteConfigPanel::Save(bool &_changed) noexcept
   AirspaceFileChanged |= SaveValueFileReader(AdditionalAirspaceFile, ProfileKeys::AdditionalAirspaceFile);
 
   FlarmFileChanged = SaveValueFileReader(FlarmFile, ProfileKeys::FlarmFile);
+  FrequenciesFileChanged = SaveValueFileReader(FrequenciesFile, ProfileKeys::FrequenciesFile);
 
   AirfieldFileChanged = SaveValueFileReader(AirfieldFile, ProfileKeys::AirfieldFile);
 
 
-  changed = WaypointFileChanged || AirfieldFileChanged || MapFileChanged || FlarmFileChanged;
+  changed = WaypointFileChanged || AirfieldFileChanged || MapFileChanged || FlarmFileChanged || FrequenciesFileChanged;
 
   _changed |= changed;
 
