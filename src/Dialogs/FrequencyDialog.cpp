@@ -83,7 +83,7 @@ public:
     // Draw name and frequency
     row_renderer.DrawTextRow(canvas, rc, channel.name.c_str());
 
-    if (channel.radio_frequency.IsDefined()) {
+//    if (channel.radio_frequency.IsDefined()) {
     	StaticString<30> buffer;
     	TCHAR radio[20];
       channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
@@ -91,7 +91,7 @@ public:
       row_renderer.DrawRightColumn(canvas, rc, buffer);
 //      row_renderer.NextColumn(canvas, rc, buffer);
 //      row_renderer.DrawRightColumn(canvas, rc, _("1234"));
-      }
+//      }
 
   }
 
