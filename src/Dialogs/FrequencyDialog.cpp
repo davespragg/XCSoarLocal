@@ -20,7 +20,7 @@ Copyright_License {
   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 */
-x
+
 #include "Dialogs.h"
 #include "Dialogs/WidgetDialog.hpp"
 #include "Widget/ListWidget.hpp"
