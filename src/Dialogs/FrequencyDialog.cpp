@@ -177,7 +177,7 @@ FrequencyListWidget::UpdateList() noexcept
 		  RadioFrequency radio_frequency = RadioFrequency::Parse(frequency);
 		  channel->radio_frequency = radio_frequency;
 	  } else {
-		  RadioFrequency radio_frequency = RadioFrequency::Null());
+		  RadioFrequency radio_frequency = RadioFrequency::Null();
 		  channel->radio_frequency = radio_frequency;
 	  }
 
