@@ -94,7 +94,7 @@ public:
 
     if (channel.squawk > 0) {
     	StaticString<30> buffer;
-    	buffer.Format(_T("%d"), channel.squawk);
+    	buffer.Format(_T("Squawk %d"), channel.squawk);
     	row_renderer.DrawRightSecondRow(canvas, rc, buffer);
     }
 
@@ -152,7 +152,7 @@ FrequencyListWidget::Prepare(ContainerWindow &parent,
                               const PixelRect &rc) noexcept
 {
   CreateList(parent, dialog_look, rc,
-             row_renderer.CalculateLayout(*dialog_look.list.font_bold, *dialog_look.list.font_bold));
+             row_renderer.CalculateLayout(*dialog_look.list.font_bold, look.small_font));
 
   GetList().SetLength(channels->size());
 }
