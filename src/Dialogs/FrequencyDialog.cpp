@@ -88,16 +88,14 @@ public:
 
     const RadioChannel& channel = (*channels)[index];
 //////////
-    MaskedIcon mountain_pass_icon;
-    mountain_pass_icon.LoadResource(IDB_MOUNTAIN_PASS, IDB_MOUNTAIN_PASS_HD);
+    MaskedIcon icon;
+   icon.LoadResource(IDB_TOWER, IDB_TOWER_HD);
 
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
-    mountain_pass_icon.Draw(canvas, pt);
-//    WaypointIconRenderer wir(settings, look, canvas);
-//    wir.Draw(waypoint, pt);
+    icon.Draw(canvas, pt);
     rc.left += line_height + padding;
 //////////
 
