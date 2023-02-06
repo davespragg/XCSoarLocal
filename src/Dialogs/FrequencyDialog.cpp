@@ -26,7 +26,6 @@ Copyright_License {
 #include "Widget/ListWidget.hpp"
 #include "Look/DialogLook.hpp"
 #include "UIGlobals.hpp"
-//#include "Renderer/TextRowRenderer.hpp"
 #include "Renderer/TwoTextRowsRenderer.hpp"
 #include "Language/Language.hpp"
 #include "ActionInterface.hpp"
@@ -45,14 +44,13 @@ class FrequencyListWidget final
   : public ListWidget {
 
   const DialogLook &dialog_look;
-//  TextRowRenderer row_renderer;
   TwoTextRowsRenderer row_renderer;
   Button *active_button, *standby_button, *cancel_button;
 
 public:
   struct RadioChannel {
 	  tstring name;
-	  tstring comments;
+	  tstring comment;
 	  RadioFrequency radio_frequency;
 	  unsigned squawk;
   };
@@ -84,7 +82,7 @@ public:
     const RadioChannel& channel = (*channels)[index];
 
     row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
-    row_renderer.DrawSecondRow(canvas, rc, channel.comments.c_str());
+    row_renderer.DrawSecondRow(canvas, rc, channel.comment.c_str());
     if (channel.radio_frequency.IsDefined()) {
     	StaticString<30> buffer;
     	TCHAR radio[20];
@@ -138,8 +136,10 @@ void
 FrequencyListWidget::Prepare(ContainerWindow &parent,
                               const PixelRect &rc) noexcept
 {
-  CreateList(parent, dialog_look, rc,
-             row_renderer.CalculateLayout(*dialog_look.list.font_bold, *dialog_look.list.font));
+//	  CreateList(parent, dialog_look, rc,
+//	             row_renderer.CalculateLayout(*dialog_look.list.font_bold, *dialog_look.list.font));
+	  CreateList(parent, dialog_look, rc,
+	             row_renderer.CalculateLayout(*dialog_look.list.font_bold, dialog_look.small_font));
 
   GetList().SetLength(channels->size());
 }
@@ -193,9 +193,9 @@ FrequencyListWidget::UpdateList() noexcept
 		  channel->squawk = 0;
 	  }
 
-	  const TCHAR *comments = i->GetAttribute(_T("comments"));
-	  if (comments != nullptr) {
-		  channel->comments = comments;
+	  const TCHAR *comment = i->GetAttribute(_T("comment"));
+	  if (comment != nullptr) {
+		  channel->comments = comment;
 	  }
 
 	  channels->push_back(*channel);
