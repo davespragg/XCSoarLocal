@@ -52,6 +52,7 @@ class FrequencyListWidget final
 public:
   struct RadioChannel {
 	  tstring name;
+	  tstring comments;
 	  RadioFrequency radio_frequency;
 	  unsigned squawk;
   };
@@ -83,7 +84,7 @@ public:
     const RadioChannel& channel = (*channels)[index];
 
     row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
-//    row_renderer.DrawSecondRow(canvas, rc, buffer);
+    row_renderer.DrawSecondRow(canvas, rc, channel.comments.c_str());
     if (channel.radio_frequency.IsDefined()) {
     	StaticString<30> buffer;
     	TCHAR radio[20];
@@ -97,20 +98,6 @@ public:
     	buffer.Format(_T("Squawk %d"), channel.squawk);
     	row_renderer.DrawRightSecondRow(canvas, rc, buffer);
     }
-
-    /*
-    // Draw name and frequency
-    row_renderer.DrawTextRow(canvas, rc, channel.name.c_str());
-
-    if (channel.radio_frequency.IsDefined()) {
-    	StaticString<30> buffer;
-    	TCHAR radio[20];
-      channel.radio_frequency.Format(radio, ARRAY_SIZE(radio));
-      buffer.Format(_T("%s MHz"), radio);
-      row_renderer.DrawRightColumn(canvas, rc, buffer);
-
-      }
-*/
   }
 
   bool CanActivateItem([[maybe_unused]] unsigned index) const noexcept override {
@@ -204,6 +191,11 @@ FrequencyListWidget::UpdateList() noexcept
 		  channel->squawk = ParseUnsigned(squawk);
 	  } else {
 		  channel->squawk = 0;
+	  }
+
+	  const TCHAR *comments = i->GetAttribute(_T("comments"));
+	  if (comments != nullptr) {
+		  channel->comments = comments;
 	  }
 
 	  channels->push_back(*channel);
