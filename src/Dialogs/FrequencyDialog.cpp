@@ -39,6 +39,8 @@ Copyright_License {
 #include "XML/Node.hpp"
 #include "XML/DataNodeXML.hpp"
 #include "XML/Parser.hpp"
+//
+#include "Screen/Layout.hpp"
 
 class FrequencyListWidget final
   : public ListWidget {
