@@ -42,6 +42,8 @@ Copyright_License {
 //
 #include "Screen/Layout.hpp"
 #include "Renderer/WaypointIconRenderer.hpp"
+#include "Look/WaypointLook.hpp"
+
 
 class FrequencyListWidget final
   : public ListWidget {
@@ -88,8 +90,9 @@ public:
     const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
-    WaypointIconRenderer wir(settings, look, canvas);
-    wir.Draw(waypoint, pt);
+    WaypointLook.vor_icon.Draw(canvas, pt);
+//    WaypointIconRenderer wir(settings, look, canvas);
+//    wir.Draw(waypoint, pt);
     rc.left += line_height + padding;
 //////////
 
