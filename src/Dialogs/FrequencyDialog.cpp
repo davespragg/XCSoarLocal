@@ -41,6 +41,7 @@ Copyright_License {
 #include "XML/Parser.hpp"
 //
 #include "Screen/Layout.hpp"
+#include "Renderer/WaypointIconRenderer.hpp"
 
 class FrequencyListWidget final
   : public ListWidget {
