@@ -87,15 +87,14 @@ public:
 
     const RadioChannel& channel = (*channels)[index];
 //////////
-    PixelRect &rc1 = rc;
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
     // Draw icon
-    const PixelPoint pt(rc1.left + line_height / 2, rc1.top + line_height / 2);
+    const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
 //    WaypointLook::vor_icon.Draw(canvas, pt);
 //    WaypointIconRenderer wir(settings, look, canvas);
 //    wir.Draw(waypoint, pt);
-    rc1.left += line_height + padding;
+    rc.left += line_height + padding;
 //////////
 
     row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
