@@ -43,6 +43,8 @@ Copyright_License {
 #include "Screen/Layout.hpp"
 #include "Renderer/WaypointIconRenderer.hpp"
 #include "Look/WaypointLook.hpp"
+#include "ui/canvas/Icon.hpp"
+#include "Resources.hpp"
 
 
 class FrequencyListWidget final
@@ -86,13 +88,14 @@ public:
 
     const RadioChannel& channel = (*channels)[index];
 //////////
-   const WaypointLook &wplook;
+    MaskedIcon mountain_pass_icon;
+    mountain_pass_icon.LoadResource(IDB_MOUNTAIN_PASS, IDB_MOUNTAIN_PASS_HD);
 
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
-    wplook.vor_icon.Draw(canvas, pt);
+    mountain_pass_icon.Draw(canvas, pt);
 //    WaypointIconRenderer wir(settings, look, canvas);
 //    wir.Draw(waypoint, pt);
     rc.left += line_height + padding;
