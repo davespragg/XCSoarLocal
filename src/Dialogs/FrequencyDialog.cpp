@@ -89,7 +89,7 @@ public:
     const RadioChannel& channel = (*channels)[index];
 //////////
     MaskedIcon icon;
-   icon.LoadResource(IDB_TOWER, IDB_TOWER_HD);
+   icon.LoadResource(IDB_NDB, IDB_NDB_HD);
 
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
