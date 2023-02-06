@@ -80,18 +80,19 @@ public:
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
 
   /* virtual methods from class List::Handler */
-//  void OnPaintItem(Canvas &canvas, const PixelRect rc,
   void OnPaintItem(Canvas &canvas, PixelRect rc,
                    unsigned index) noexcept override {
     assert(index < channels->size());
 
     const RadioChannel& channel = (*channels)[index];
 //////////
+   const WaypointLook &wplook;
+
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
-//    WaypointLook::vor_icon.Draw(canvas, pt);
+    wplook.vor_icon.Draw(canvas, pt);
 //    WaypointIconRenderer wir(settings, look, canvas);
 //    wir.Draw(waypoint, pt);
     rc.left += line_height + padding;
