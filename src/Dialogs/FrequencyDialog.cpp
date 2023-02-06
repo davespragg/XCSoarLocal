@@ -80,6 +80,15 @@ public:
     assert(index < channels->size());
 
     const RadioChannel& channel = (*channels)[index];
+//////////
+    const unsigned padding = Layout::GetTextPadding();
+    const unsigned line_height = rc.GetHeight();
+    // Draw icon
+    const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
+    WaypointIconRenderer wir(settings, look, canvas);
+    wir.Draw(waypoint, pt);
+    rc.left += line_height + padding;
+//////////
 
     row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
     row_renderer.DrawSecondRow(canvas, rc, channel.comment.c_str());
