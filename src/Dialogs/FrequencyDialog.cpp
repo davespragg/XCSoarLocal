@@ -86,6 +86,7 @@ public:
 
     const RadioChannel& channel = (*channels)[index];
 //////////
+    PixelRect &rc1 = rc;
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
     // Draw icon
