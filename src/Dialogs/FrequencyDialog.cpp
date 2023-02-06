@@ -80,7 +80,8 @@ public:
   void Prepare(ContainerWindow &parent, const PixelRect &rc) noexcept override;
 
   /* virtual methods from class List::Handler */
-  void OnPaintItem(Canvas &canvas, const PixelRect rc,
+//  void OnPaintItem(Canvas &canvas, const PixelRect rc,
+  void OnPaintItem(Canvas &canvas, PixelRect rc,
                    unsigned index) noexcept override {
     assert(index < channels->size());
 
