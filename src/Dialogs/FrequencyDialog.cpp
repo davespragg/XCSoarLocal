@@ -195,7 +195,7 @@ FrequencyListWidget::UpdateList() noexcept
 
 	  const TCHAR *comment = i->GetAttribute(_T("comment"));
 	  if (comment != nullptr) {
-		  channel->comments = comment;
+		  channel->comment = comment;
 	  }
 
 	  channels->push_back(*channel);
