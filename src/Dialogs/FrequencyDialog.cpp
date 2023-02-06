@@ -90,7 +90,7 @@ public:
     const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
-    WaypointLook.vor_icon.Draw(canvas, pt);
+    WaypointLook::vor_icon.Draw(canvas, pt);
 //    WaypointIconRenderer wir(settings, look, canvas);
 //    wir.Draw(waypoint, pt);
     rc.left += line_height + padding;
