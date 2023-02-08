@@ -41,8 +41,6 @@ Copyright_License {
 #include "XML/Parser.hpp"
 //
 #include "Screen/Layout.hpp"
-//#include "Renderer/WaypointIconRenderer.hpp"
-//#include "Look/WaypointLook.hpp"
 #include "ui/canvas/Icon.hpp"
 #include "Resources.hpp"
 
@@ -63,6 +61,7 @@ public:
 	  unsigned char type;
   };
   std::vector<RadioChannel> *channels;
+  tstring listName;
 
 public:
   void CreateButtons(WidgetDialog &dialog);
@@ -191,6 +190,8 @@ FrequencyListWidget::UpdateList() noexcept
   if (!StringIsEqual(root.GetName(), _T("FrequencyList")))
     return false;
 
+  listName = root.GetAttribute(_T("name"));
+
   const auto children = root.ListChildrenNamed(_T("Station"));
   for (const auto &i : children) {
 	  const TCHAR *name = i->GetAttribute(_T("name"));
@@ -248,7 +249,8 @@ FrequencyDialogShowModal() noexcept
 
   TWidgetDialog<FrequencyListWidget>
     dialog(WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
-           look, _("Frequency Card"));
+//          look, _("Frequency Card"));
+  	  	  look, _(listName));
   widget->CreateButtons(dialog);
 
   dialog.FinishPreliminary(std::move(widget));
