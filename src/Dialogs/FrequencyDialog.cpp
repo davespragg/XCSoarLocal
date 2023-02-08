@@ -30,10 +30,7 @@ Copyright_License {
 #include "Language/Language.hpp"
 #include "ActionInterface.hpp"
 #include "Profile/Profile.hpp"
-//#include "UtilsSettings.hpp"
 #include "io/FileLineReader.hpp"
-//#include "util/ExtractParameters.hpp"
-//#include "util/StringCompare.hxx"
 #include "util/Macros.hpp"
 #include "util/NumberParser.hpp"
 #include "XML/Node.hpp"
@@ -85,22 +82,19 @@ public:
     assert(index < channels->size());
 
     const RadioChannel& channel = (*channels)[index];
-//////////
+
+    const unsigned padding = Layout::GetTextPadding();
+    const unsigned line_height = rc.GetHeight();
     MaskedIcon icon;
     if (channel.type == 1) {
     	icon.LoadResource(IDB_RADIO, IDB_PLANE_HD);
     } else {
         icon.LoadResource(IDB_RADIO, IDB_RADIO_HD);
     }
-
-
-    const unsigned padding = Layout::GetTextPadding();
-    const unsigned line_height = rc.GetHeight();
     // Draw icon
     const PixelPoint pt(rc.left + line_height / 2, rc.top + line_height / 2);
     icon.Draw(canvas, pt);
     rc.left += line_height + padding;
-//////////
 
     row_renderer.DrawFirstRow(canvas, rc, channel.name.c_str());
     row_renderer.DrawSecondRow(canvas, rc, channel.comment.c_str());
