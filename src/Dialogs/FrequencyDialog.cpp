@@ -41,8 +41,8 @@ Copyright_License {
 #include "XML/Parser.hpp"
 //
 #include "Screen/Layout.hpp"
-#include "Renderer/WaypointIconRenderer.hpp"
-#include "Look/WaypointLook.hpp"
+//#include "Renderer/WaypointIconRenderer.hpp"
+//#include "Look/WaypointLook.hpp"
 #include "ui/canvas/Icon.hpp"
 #include "Resources.hpp"
 
@@ -60,6 +60,7 @@ public:
 	  tstring comment;
 	  RadioFrequency radio_frequency;
 	  unsigned squawk;
+	  unsigned char type;
   };
   std::vector<RadioChannel> *channels;
 
@@ -89,8 +90,12 @@ public:
     const RadioChannel& channel = (*channels)[index];
 //////////
     MaskedIcon icon;
-//    icon.LoadResource(IDB_RADIO, IDB_RADIO_HD);
-    icon.LoadResource(IDB_RADIO, IDB_PLANE_HD);
+    if (channel.type == 1) {
+    	icon.LoadResource(IDB_RADIO, IDB_PLANE_HD);
+    } else {
+        icon.LoadResource(IDB_RADIO, IDB_RADIO_HD);
+    }
+
 
     const unsigned padding = Layout::GetTextPadding();
     const unsigned line_height = rc.GetHeight();
@@ -155,8 +160,6 @@ void
 FrequencyListWidget::Prepare(ContainerWindow &parent,
                               const PixelRect &rc) noexcept
 {
-//	  CreateList(parent, dialog_look, rc,
-//	             row_renderer.CalculateLayout(*dialog_look.list.font_bold, *dialog_look.list.font));
 	  CreateList(parent, dialog_look, rc,
 	             row_renderer.CalculateLayout(*dialog_look.list.font_bold, dialog_look.small_font));
 
@@ -210,6 +213,13 @@ FrequencyListWidget::UpdateList() noexcept
 		  channel->squawk = ParseUnsigned(squawk);
 	  } else {
 		  channel->squawk = 0;
+	  }
+
+	  const TCHAR *type = i->GetAttribute(_T("type"));
+	  if (type != nullptr) {
+		  channel->type = ParseUnsigned(type);
+	  } else {
+		  channel->type = 0;
 	  }
 
 	  const TCHAR *comment = i->GetAttribute(_T("comment"));
