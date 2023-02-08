@@ -61,7 +61,6 @@ public:
 	  unsigned char type;
   };
   std::vector<RadioChannel> *channels;
-  tstring listName;
 
 public:
   void CreateButtons(WidgetDialog &dialog);
@@ -249,8 +248,7 @@ FrequencyDialogShowModal() noexcept
 
   TWidgetDialog<FrequencyListWidget>
     dialog(WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
-//          look, _("Frequency Card"));
-  	  	  look, listName);
+          look, _("Frequency Card"));
   widget->CreateButtons(dialog);
 
   dialog.FinishPreliminary(std::move(widget));
