@@ -250,7 +250,7 @@ FrequencyDialogShowModal() noexcept
   TWidgetDialog<FrequencyListWidget>
     dialog(WidgetDialog::Full{}, UIGlobals::GetMainWindow(),
 //          look, _("Frequency Card"));
-  	  	  look, _(listName));
+  	  	  look, listName);
   widget->CreateButtons(dialog);
 
   dialog.FinishPreliminary(std::move(widget));
