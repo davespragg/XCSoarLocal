@@ -29,7 +29,7 @@ Copyright_License {
 #include "Renderer/TwoTextRowsRenderer.hpp"
 #include "Language/Language.hpp"
 #include "ActionInterface.hpp"
-//#include "Profile/Profile.hpp"
+#include "Profile/Profile.hpp"
 //#include "UtilsSettings.hpp"
 //#include "io/FileLineReader.hpp"
 //#include "util/ExtractParameters.hpp"
@@ -39,8 +39,7 @@ Copyright_License {
 #include "XML/Node.hpp"
 #include "XML/DataNodeXML.hpp"
 #include "XML/Parser.hpp"
-//
-//#include "Screen/Layout.hpp"
+#include "Screen/Layout.hpp"
 #include "ui/canvas/Icon.hpp"
 #include "Resources.hpp"
 
