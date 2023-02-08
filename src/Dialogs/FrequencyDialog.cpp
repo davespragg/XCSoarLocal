@@ -189,8 +189,6 @@ FrequencyListWidget::UpdateList() noexcept
   if (!StringIsEqual(root.GetName(), _T("FrequencyList")))
     return false;
 
-  listName = root.GetAttribute(_T("name"));
-
   const auto children = root.ListChildrenNamed(_T("Station"));
   for (const auto &i : children) {
 	  const TCHAR *name = i->GetAttribute(_T("name"));
