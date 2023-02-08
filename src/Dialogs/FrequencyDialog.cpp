@@ -30,7 +30,7 @@ Copyright_License {
 #include "Language/Language.hpp"
 #include "ActionInterface.hpp"
 #include "Profile/Profile.hpp"
-//#include "UtilsSettings.hpp"
+#include "UtilsSettings.hpp"
 //#include "io/FileLineReader.hpp"
 //#include "util/ExtractParameters.hpp"
 //#include "util/StringCompare.hxx"
