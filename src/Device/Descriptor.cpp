@@ -836,7 +836,7 @@ DeviceDescriptor::ForwardLine(const char *line)
 		  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
 			  // NASTYDATEHACK
 			  if (StringIsEqual(line + 3, "RMC", 3)) {
-				  char *p = strstr(line,"0223"); //feb 23
+				  const char *p = strstr(line,"0223"); //feb 23
 				  if (p != NULL) {
 					  memcpy(p,"0221",4);
 				  }
