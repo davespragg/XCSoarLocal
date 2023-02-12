@@ -849,7 +849,7 @@ DeviceDescriptor::ForwardLine(const char *line)
 						      crc ^= newLine[i];
 						  }
 						  d = strstr(newLine,"*");
-						  sprintf(d,"*%02x",crc)
+						  sprintf(d,"*%02x",crc);
 					  }
 					  // /NASTYDATEHACK
 					Port *p = port.get();
