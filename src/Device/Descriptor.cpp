@@ -844,7 +844,7 @@ DeviceDescriptor::ForwardLine(const char *line)
 							  memcpy(d,"0221",4);
 						  }
 					  }
-					  // /NASTYHACK
+					  // /NASTYDATEHACK
 					Port *p = port.get();
 //					p->Write(line);
 					p->Write(newLine);
