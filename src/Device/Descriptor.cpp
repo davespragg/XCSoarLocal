@@ -845,7 +845,7 @@ DeviceDescriptor::ForwardLine(const char *line)
 						  }
 						  // regen checksum
 						  int crc=0;
-						  for (int i = 1; i < strlen(newLine) - 3; i ++) {
+						  for (size_t i = 1; i < strlen(newLine) - 3; i ++) {
 						      crc ^= newLine[i];
 						  }
 						  d = strstr(newLine,"*");
