@@ -843,6 +843,13 @@ DeviceDescriptor::ForwardLine(const char *line)
 						  if (d != NULL) {
 							  memcpy(d,"0221",4);
 						  }
+						  // regen checksum
+						  int crc=0;
+						  for (int i = 1; i < strlen(newLine) - 3; i ++) {
+						      crc ^= newLine[i];
+						  }
+						  d = strstr(newLine,"*");
+						  sprintf(d,"*%02x",crc)
 					  }
 					  // /NASTYDATEHACK
 					Port *p = port.get();
