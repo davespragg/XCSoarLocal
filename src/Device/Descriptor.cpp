@@ -820,8 +820,7 @@ DeviceDescriptor::ParseNMEA(const char *line, NMEAInfo &info) noexcept
 }
 
 void
-DeviceDescriptor::ForwardLine(char *line)
-//DeviceDescriptor::ForwardLine(const char *line)
+DeviceDescriptor::ForwardLine(const char *line)
 {
   /* XXX make this method thread-safe; this method can be called from
      any thread, and if the Port gets closed, bad things happen */
@@ -835,17 +834,20 @@ DeviceDescriptor::ForwardLine(char *line)
   if (NeedsGPS() && port != nullptr) {
 	  if (line[0] == '$') {
 		  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
-			  // NASTYDATEHACK
-			  if (StringIsEqual(line + 3, "RMC", 3)) {
-				  char *p = strstr(line,"0223"); //feb 23
-				  if (p != NULL) {
-					  memcpy(p,"0221",4);
-				  }
-			  }
-			  // /NASTYHACK
 			    if (StringIsEqual(line + 3, "RMC", 3) || StringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
+					char newLine[200];
+					strcpy(newLine,line);
+			    	// NASTYDATEHACK
+					  if (StringIsEqual(newLine + 3, "RMC", 3)) {
+						  char *d = strstr(newLine,"0223"); //feb 23
+						  if (d != NULL) {
+							  memcpy(d,"0221",4);
+						  }
+					  }
+					  // /NASTYHACK
 					Port *p = port.get();
-					p->Write(line);
+//					p->Write(line);
+					p->Write(newLine);
 					p->Write("\r\n");
 			    }
 		  }
