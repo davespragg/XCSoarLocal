@@ -835,9 +835,9 @@ DeviceDescriptor::ForwardLine(const char *line)
 	  if (line[0] == '$') {
 		  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
 			    if (StringIsEqual(line + 3, "RMC", 3) || StringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
+			    	// NASTYDATEHACK to test ACD behaviour
 					char newLine[200];
 					strcpy(newLine,line);
-			    	// NASTYDATEHACK
 					  if (StringIsEqual(newLine + 3, "RMC", 3)) {
 						  char *d = strstr(newLine,"0223"); //feb 23
 						  if (d != NULL) {
