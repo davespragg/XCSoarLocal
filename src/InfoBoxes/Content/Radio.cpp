@@ -50,6 +50,7 @@ UpdateInfoBoxFrequency(InfoBoxData &data, const RadioFrequency freq,
   }
 }
 
+static void
 UpdateInfoBoxSquawk(InfoBoxData &data, unsigned squawk) noexcept
 {
   if(squawk > 0) {
