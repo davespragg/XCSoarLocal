@@ -181,7 +181,7 @@ RadioProcess() noexcept
 
   return modified;
 }
-
+/*
 static bool
 TransponderProcess() noexcept
 {
@@ -199,7 +199,7 @@ TransponderProcess() noexcept
 
   return modified;
 }
-
+*/
 bool
 ApplyExternalSettings(OperationEnvironment &env) noexcept
 {

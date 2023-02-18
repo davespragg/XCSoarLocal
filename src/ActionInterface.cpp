@@ -388,7 +388,7 @@ ActionInterface::ExchangeRadioFrequencies(bool to_devices) noexcept
 }
 
 void
-ActionInterface::SetSquawk(unsiqned squawk, bool to_devices) noexcept
+ActionInterface::SetSquawk(unsigned squawk, bool to_devices) noexcept
 {
   /* update interface settings */
 
