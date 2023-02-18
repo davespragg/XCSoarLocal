@@ -210,6 +210,6 @@ ApplyExternalSettings(OperationEnvironment &env) noexcept
   modified |= QNHProcessTimer(env);
   modified |= MacCreadyProcessTimer();
   modified |= RadioProcess();
-  modified |= TransponderProcess();
+//  modified |= TransponderProcess();
   return modified;
 }
