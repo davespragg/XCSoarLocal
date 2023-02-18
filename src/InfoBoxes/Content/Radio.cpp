@@ -50,6 +50,16 @@ UpdateInfoBoxFrequency(InfoBoxData &data, const RadioFrequency freq,
   }
 }
 
+UpdateInfoBoxSquawk(InfoBoxData &data, unsigned squawk) noexcept
+{
+  if(squawk > 0) {
+    data.FormatValue(_T("%u"), squawk);
+  }
+  else {
+    data.SetValueInvalid();
+  }
+}
+
 static constexpr InfoBoxPanel active_frequency_panels[] = {
   { N_("Edit"), LoadActiveRadioFrequencyEditPanel },
   { nullptr, nullptr }
