@@ -92,6 +92,10 @@ struct ExternalSettings {
 
   Validity swap_frequencies;
 
+  /** transponder */
+  Validity has_squawk;
+  unsigned squawk;
+
   void Clear();
   void Expire(TimeStamp time) noexcept;
   void Complement(const ExternalSettings &add);

@@ -40,6 +40,8 @@ ExternalSettings::Clear()
   standby_frequency.Clear();
   standby_freq_name.clear();
   swap_frequencies.Clear();
+  has_squawk.Clear();
+  squawk = 0;
   ballast_litres_available.Clear();
 }
 
@@ -110,6 +112,13 @@ ExternalSettings::Complement(const ExternalSettings &add)
   if (add.swap_frequencies.Modified(swap_frequencies)) {
     swap_frequencies = add.swap_frequencies;
   }
+
+  if (add.has_squawk.Modified(has_squawk) &&
+      add.squawk > 0) {
+    has_squawk = add.has_squawk;
+    squawk = add.squawk;
+  }
+
 }
 
 void

@@ -181,7 +181,7 @@ RadioProcess() noexcept
 
   return modified;
 }
-/*
+
 static bool
 TransponderProcess() noexcept
 {
@@ -199,7 +199,7 @@ TransponderProcess() noexcept
 
   return modified;
 }
-*/
+
 bool
 ApplyExternalSettings(OperationEnvironment &env) noexcept
 {
@@ -210,6 +210,6 @@ ApplyExternalSettings(OperationEnvironment &env) noexcept
   modified |= QNHProcessTimer(env);
   modified |= MacCreadyProcessTimer();
   modified |= RadioProcess();
-//  modified |= TransponderProcess();
+  modified |= TransponderProcess();
   return modified;
 }
