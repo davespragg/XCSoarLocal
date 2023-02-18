@@ -90,6 +90,15 @@ InfoBoxContentActiveRadioFrequency::Update(InfoBoxData &data) noexcept
   UpdateInfoBoxFrequency(data, settings_radio.active_frequency, settings_radio.active_name);
 }
 
+void
+InfoBoxContentStandbyRadioFrequency::Update(InfoBoxData &data) noexcept
+{
+  const auto &settings_radio =
+    CommonInterface::GetComputerSettings().radio;
+    data.SetValueColor(3);
+  UpdateInfoBoxFrequency(data, settings_radio.standby_frequency, settings_radio.standby_name);
+}
+
 const InfoBoxPanel *
 InfoBoxContentStandbyRadioFrequency::GetDialogContent() noexcept
 {
