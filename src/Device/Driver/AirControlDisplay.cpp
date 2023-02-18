@@ -93,9 +93,25 @@ ParsePAAVS(NMEAInputLine &line, NMEAInfo &info)
     unsigned volume;
     if (line.ReadChecked(volume))
       info.settings.ProvideVolume(volume, info.clock);
+  } else if (StringIsEqual(type, "XPDR")) {
+    /*
+    $PAAVS,XPDR,<SQUAWK>,<ACTIVE>,<ALTINH>
+    <SQUAWK> Squawk code value;
+    		 Octal unsigned integer value between 0000 and 7777 (digits 0–7).
+    <ACTIVE> Active flag;
+    	     0: standby (transponder is switched off / "SBY" mode)
+			 1: active (transponder is switched on / "ALT" or "ON" mode
+			 dependent of ALTINH)
+    <ALTINH> Altitude inhibit flag;
+             0: transmit altitude ("ALT" mode if active)
+             1: do not transmit altitude ("ON" mode if active)
+     */
+	    if (line.ReadChecked(value)) {
+	    	info.settings.has_squawk.Update(info.clock);
+	    	info.settings.squawk = value;
+	      }
   } else {
-    // ignore responses from XPDR
-    return false;
+	return false;
   }
 
   return true;
@@ -115,6 +131,7 @@ public:
   bool PutStandbyFrequency(RadioFrequency frequency,
                            const TCHAR *name,
                            OperationEnvironment &env) override;
+  bool PutSquawk(unsigned squawk, OperationEnvironment &env) override;
 };
 
 bool
@@ -144,6 +161,15 @@ ACDDevice::PutStandbyFrequency(RadioFrequency frequency,
   char buffer[100];
   unsigned freq = frequency.GetKiloHertz();
   sprintf(buffer, "PAAVC,S,COM,CHN2,%u", freq);
+  PortWriteNMEA(port, buffer, env);
+  return true;
+}
+
+bool
+ACDDevice::PutSquawk(unsigned squawk, OperationEnvironment &env)
+{
+  char buffer[100];
+  sprintf(buffer, "PAAVC,S,XPDR,SQUAWK,%u", squawk);
   PortWriteNMEA(port, buffer, env);
   return true;
 }
