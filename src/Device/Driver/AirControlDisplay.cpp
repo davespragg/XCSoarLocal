@@ -75,19 +75,13 @@ ParsePAAVS(NMEAInputLine &line, NMEAInfo &info)
      */
 
     if (line.ReadChecked(value)) {
-      // Only update if changed, to preserve name on Infobox
-      if (info.settings.active_frequency.GetKiloHertz() != value) {
-    	info.settings.has_active_frequency.Update(info.clock);
-    	info.settings.active_frequency = RadioFrequency::FromKiloHertz(value);
-      }
+      info.settings.has_active_frequency.Update(info.clock);
+      info.settings.active_frequency = RadioFrequency::FromKiloHertz(value);
     }
 
     if (line.ReadChecked(value)) {
-      // Only update if changed, to preserve name on Infobox
-      if (info.settings.standby_frequency.GetKiloHertz() != value) {
-        info.settings.has_standby_frequency.Update(info.clock);
-        info.settings.standby_frequency = RadioFrequency::FromKiloHertz(value);
-      }
+      info.settings.has_standby_frequency.Update(info.clock);
+      info.settings.standby_frequency = RadioFrequency::FromKiloHertz(value);
     }
 
     unsigned volume;
