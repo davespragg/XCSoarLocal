@@ -131,6 +131,14 @@ MultipleDevices::PutStandbyFrequency(RadioFrequency frequency,
 }
 
 void
+MultipleDevices::PutSquawk(unsigned squawk,
+                                     OperationEnvironment &env) noexcept
+{
+  for (DeviceDescriptor *i : devices)
+    i->PutSquawk(squawk, env);
+}
+
+void
 MultipleDevices::PutQNH(AtmosphericPressure pres,
                         OperationEnvironment &env) noexcept
 {

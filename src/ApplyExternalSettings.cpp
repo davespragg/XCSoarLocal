@@ -182,6 +182,24 @@ RadioProcess() noexcept
   return modified;
 }
 
+static bool
+TransponderProcess() noexcept
+{
+  bool modified = false;
+
+  const NMEAInfo &basic = CommonInterface::Basic();
+
+  static Validity last_squawk;
+
+  if (basic.settings.has_squawk.Modified(last_squawk)) {
+    ActionInterface::SetSquawk(basic.settings.squawk, false);
+    last_squawk = basic.settings.has_squawk;
+    modified = true;
+  }
+
+  return modified;
+}
+
 bool
 ApplyExternalSettings(OperationEnvironment &env) noexcept
 {
@@ -192,5 +210,6 @@ ApplyExternalSettings(OperationEnvironment &env) noexcept
   modified |= QNHProcessTimer(env);
   modified |= MacCreadyProcessTimer();
   modified |= RadioProcess();
+  modified |= TransponderProcess();
   return modified;
 }

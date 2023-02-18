@@ -386,3 +386,24 @@ ActionInterface::ExchangeRadioFrequencies(bool to_devices) noexcept
   ActionInterface::SetActiveFrequency(radio_settings.standby_frequency, radio_settings.standby_name, to_devices);
   ActionInterface::SetStandbyFrequency(old_active_freq, old_active_freq_name, to_devices);
 }
+
+void
+ActionInterface::SetSquawk(unsiqned squawk, bool to_devices) noexcept
+{
+  /* update interface settings */
+
+  SetComputerSettings().radio.squawk = squawk;
+
+  /* update InfoBoxes (that might show the squawk setting) */
+
+  InfoBoxManager::SetDirty();
+
+  /* send to external devices */
+
+  if (to_devices) {
+    MessageOperationEnvironment env;
+    devices->PutSquawk(squawk, env);
+  }
+}
+
+

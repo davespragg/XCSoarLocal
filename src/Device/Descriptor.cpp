@@ -835,26 +835,8 @@ DeviceDescriptor::ForwardLine(const char *line)
 	  if (line[0] == '$') {
 		  if (IsAlphaASCII(line[1]) && IsAlphaASCII(line[2])) {
 			    if (StringIsEqual(line + 3, "RMC", 3) || StringIsEqual(line + 3, "GSA", 3) || StringIsEqual(line + 3, "GGA", 3)) {
-			    	// NASTYDATEHACK to test ACD behaviour
-					char newLine[200];
-					strcpy(newLine,line);
-					  if (StringIsEqual(newLine + 3, "RMC", 3)) {
-						  char *d = strstr(newLine,"0223"); //feb 23
-						  if (d != NULL) {
-							  memcpy(d,"0221",4);
-						  }
-						  // regen checksum
-						  int crc=0;
-						  for (size_t i = 1; i < strlen(newLine) - 3; i ++) {
-						      crc ^= newLine[i];
-						  }
-						  d = strstr(newLine,"*");
-						  sprintf(d,"*%02x",crc);
-					  }
-					  // /NASTYDATEHACK
 					Port *p = port.get();
-//					p->Write(line);
-					p->Write(newLine);
+					p->Write(line);
 					p->Write("\r\n");
 			    }
 		  }
@@ -1088,6 +1070,30 @@ DeviceDescriptor::PutStandbyFrequency(RadioFrequency frequency,
     return false;
   } catch (...) {
     LogError(std::current_exception(), "PutStandbyFrequency() failed");
+    return false;
+  }
+}
+
+bool
+DeviceDescriptor::PutSquawk(unsigned squawk,
+                                      OperationEnvironment &env) noexcept
+{
+  assert(InMainThread());
+
+  if (device == nullptr || !config.sync_to_device)
+    return true;
+
+  if (!Borrow())
+    /* TODO: postpone until the borrowed device has been returned */
+    return false;
+
+  try {
+    ScopeReturnDevice restore(*this, env);
+    return device->PutSquawk(squawk, env);
+  } catch (OperationCancelled) {
+    return false;
+  } catch (...) {
+    LogError(std::current_exception(), "PutSquawk() failed");
     return false;
   }
 }

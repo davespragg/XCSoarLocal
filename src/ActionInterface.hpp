@@ -158,6 +158,15 @@ ExchangeRadioFrequencies(bool to_devices=true) noexcept;
 } // namespace ActionInterface
 
 /**
+ * Update the Squawk Code in #ComputerSettings, and
+ * forward it to all XCSoar modules that want it.
+ *
+ * @param to_devices send the new setting to all devices?
+ */
+void
+SetSquawk(unsigned squawk, bool to_devices=true) noexcept;
+
+/**
  * Class to hold data/methods accessible by interface subsystems
  * of main program
  */

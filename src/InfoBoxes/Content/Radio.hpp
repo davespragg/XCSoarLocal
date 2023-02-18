@@ -38,3 +38,10 @@ public:
   const InfoBoxPanel *GetDialogContent() noexcept override;
   void Update(InfoBoxData &data) noexcept override;
 };
+
+class InfoBoxContentSquawk : public InfoBoxContent
+{
+public:
+  const InfoBoxPanel *GetDialogContent() noexcept override;
+//  void Update(InfoBoxData &data) noexcept override;
+};

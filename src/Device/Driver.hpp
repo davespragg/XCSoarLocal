@@ -149,6 +149,15 @@ public:
                                    OperationEnvironment &env) = 0;
 
   /**
+   * Set a new transponder squawk code.
+   *
+   * @param squawk code
+   * @return true on success
+   */
+  virtual bool PutSquawk(unsigned squawk,
+                                   OperationEnvironment &env) = 0;
+
+  /**
    * Enable pass-through mode.  This may be used to communicate
    * directly with the device that is "behind" this one (e.g. a LX1600
    * connected to a FLARM).
@@ -264,6 +273,8 @@ public:
   bool PutStandbyFrequency(RadioFrequency frequency,
                            const TCHAR *name,
                            OperationEnvironment &env) override;
+
+  bool PutSquawk(unsigned squawk, OperationEnvironment &env) override;
 
   bool EnablePassThrough(OperationEnvironment &env) override;
 

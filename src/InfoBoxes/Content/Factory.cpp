@@ -1083,6 +1083,14 @@ static constexpr MetaData meta_data[] = {
     IBFHelper<InfoBoxContentStandbyRadioFrequency>::Create,
   },
 
+  // Transponder squawk code
+  {
+    N_("Squawk"),
+    N_("Squawk"),
+    N_("Transponder Squawk Code"),
+    IBFHelper<InfoBoxContentSquawk>::Create,
+  },
+
   // e_Thermal_Time
   {
     N_("Thermal time"),

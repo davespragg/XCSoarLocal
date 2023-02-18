@@ -100,6 +100,13 @@ AbstractDevice::PutStandbyFrequency([[maybe_unused]] RadioFrequency frequency,
 }
 
 bool
+AbstractDevice::PutSquawk([[maybe_unused]] unsigned squawk,
+                                    [[maybe_unused]] OperationEnvironment &env)
+{
+  return true;
+}
+
+bool
 AbstractDevice::EnablePassThrough([[maybe_unused]] OperationEnvironment &env)
 {
   return true;

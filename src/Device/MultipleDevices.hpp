@@ -92,6 +92,7 @@ public:
                           OperationEnvironment &env) noexcept;
   void PutStandbyFrequency(RadioFrequency frequency, const TCHAR *name,
                            OperationEnvironment &env) noexcept;
+  void PutSquawk(unsigned squawk, OperationEnvironment &env) noexcept;
   void PutQNH(AtmosphericPressure pres, OperationEnvironment &env) noexcept;
   void NotifySensorUpdate(const MoreData &basic) noexcept;
   void NotifyCalculatedUpdate(const MoreData &basic,

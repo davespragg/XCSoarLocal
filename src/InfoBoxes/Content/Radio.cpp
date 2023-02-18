@@ -82,10 +82,18 @@ InfoBoxContentStandbyRadioFrequency::GetDialogContent() noexcept
 }
 
 void
-InfoBoxContentStandbyRadioFrequency::Update(InfoBoxData &data) noexcept
+InfoBoxContentSquawk::Update(InfoBoxData &data) noexcept
 {
   const auto &settings_radio =
     CommonInterface::GetComputerSettings().radio;
     data.SetValueColor(2);
-  UpdateInfoBoxFrequency(data, settings_radio.standby_frequency, settings_radio.standby_name);
+  UpdateInfoBoxSquawk(data, settings_radio.squawk);
 }
+
+const InfoBoxPanel *
+InfoBoxContentSquawk::GetDialogContent() noexcept
+{
+  return squawk_frequency_panels;
+}
+
+
