@@ -71,7 +71,7 @@ static constexpr InfoBoxPanel standby_frequency_panels[] = {
   { nullptr, nullptr }
 };
 
-static constexpr InfoBoxPanel squawk_frequency_panels[] = {
+static constexpr InfoBoxPanel squawk_panels[] = {
   { nullptr, nullptr }
 };
 
@@ -108,7 +108,7 @@ InfoBoxContentSquawk::Update(InfoBoxData &data) noexcept
 const InfoBoxPanel *
 InfoBoxContentSquawk::GetDialogContent() noexcept
 {
-  return squawk_frequency_panels;
+  return squawk_panels;
 }
 
 
