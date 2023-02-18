@@ -110,7 +110,7 @@ InfoBoxContentSquawk::Update(InfoBoxData &data) noexcept
 {
   const auto &settings_radio =
     CommonInterface::GetComputerSettings().radio;
-    data.SetValueColor(2);
+//    data.SetValueColor(2);
   UpdateInfoBoxSquawk(data, settings_radio.squawk);
 }
 
