@@ -164,9 +164,11 @@ namespace InfoBoxFactory
     e_NbrSat, /* Number of used Sat by GPS module */
 
     e_ActiveRadio, /* Active Radio Frequency */
-
     e_StandbyRadio, /* Standby Radio Frequency */
-    e_Thermal_Time, /* Time in Thermal*/
+
+	e_Squawk, /* Transponder squawk code */
+
+	e_Thermal_Time, /* Time in Thermal*/
 
     e_Alternate_2_GR, /* Geometric gradient to the arrival height above the second alternate. This is not adjusted for total energy */
 
