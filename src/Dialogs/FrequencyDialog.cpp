@@ -123,6 +123,18 @@ public:
 void
 FrequencyListWidget::CreateButtons(WidgetDialog &dialog)
 {
+	standby_and_squawk_button = dialog.AddButton(_("Set Standby and Squawk"), [this](){
+	    unsigned index = GetCursorIndex();
+	    assert(index < channels->size());
+	    const RadioChannel *channel = &(*channels)[index];
+	    if (channel->radio_frequency.IsDefined()) {
+	    	ActionInterface::SetStandbyFrequency(channel->radio_frequency,
+	            channel->name.c_str());}
+	    if (channel->squawk > 0) {
+	    	ActionInterface::SetSquawk(channel->squawk);}
+	    cancel_button->Click();
+	});
+
 	standby_button = dialog.AddButton(_("Set Standby Frequency"), [this](){
 	    unsigned index = GetCursorIndex();
 	    assert(index < channels->size());
@@ -142,17 +154,6 @@ FrequencyListWidget::CreateButtons(WidgetDialog &dialog)
 	    cancel_button->Click();
 	});
 
-	standby_and_squawk_button = dialog.AddButton(_("Set Standby and Squawk"), [this](){
-	    unsigned index = GetCursorIndex();
-	    assert(index < channels->size());
-	    const RadioChannel *channel = &(*channels)[index];
-	    if (channel->radio_frequency.IsDefined()) {
-	    	ActionInterface::SetStandbyFrequency(channel->radio_frequency,
-	            channel->name.c_str());}
-	    if (channel->squawk > 0) {
-	    	ActionInterface::SetSquawk(channel->squawk);}
-	    cancel_button->Click();
-	});
 /*  active_button = dialog.AddButton(_("Set Active Frequency"), [this](){
     unsigned index = GetCursorIndex();
     assert(index < channels->size());
